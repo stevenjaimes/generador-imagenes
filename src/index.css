@@ -1,0 +1,8 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Definir la fuente por defecto */
+* {
+    font-family: 'Poppins', sans-serif;
+  }

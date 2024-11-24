@@ -1,0 +1,31 @@
+[
+  {
+    "path": "/imagenes-creadas",
+    "name": "Imágenes creadas",    
+    "showInMenu": true
+  },
+  {
+    "path": "/stable-diffusion",
+    "modelUrl": "https://api-inference.huggingface.co/models/stabilityai/stable-diffusion-3.5-large",
+    "name": "Stable Diffusion v3.5",
+    "timeout": 400,
+    "showInMenu": true,
+    "date": "2024-09-01"
+  },
+  {
+    "path": "/Stable-difussion-v1-4",
+    "modelUrl": "https://api-inference.huggingface.co/models/CompVis/stable-diffusion-v1-4",
+    "name": "Stable Diffusion v1.4",
+    "timeout": 600,
+    "showInMenu": true,
+    "date": "2022-06-01"
+  },
+  {
+    "path": "/In-Context-LoRA",
+    "modelUrl": "https://api-inference.huggingface.co/models/ali-vilab/In-Context-LoRA",
+    "name": "IC-LoRA",
+    "timeout": 3000,
+    "showInMenu": true,
+    "date": "2024-11-01"
+  }
+]
