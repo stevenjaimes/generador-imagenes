@@ -3,11 +3,17 @@ export const initializeDB = () => {
   
     request.onupgradeneeded = (event) => {
       const db = event.target.result;
+      // Crea la tienda de objetos "images" si no existe
       if (!db.objectStoreNames.contains("images")) {
         db.createObjectStore("images", { keyPath: "id" });
       }
     };
+  
+    request.onerror = (event) => {
+      console.error("Error al abrir la base de datos", event.target.error);
+    };
   };
+  
   
   export const saveImageToDB = (id, blob) => {
     return new Promise((resolve, reject) => {
@@ -18,15 +24,17 @@ export const initializeDB = () => {
         const transaction = db.transaction("images", "readwrite");
         const store = transaction.objectStore("images");
   
+        // Guardamos la imagen en la tienda de objetos
         store.put({ id, blob });
   
         transaction.oncomplete = () => resolve();
         transaction.onerror = (err) => reject(err);
       };
   
-      request.onerror = (err) => reject(err);
+      request.onerror = (err) => reject("Error al abrir la base de datos: " + err);
     });
   };
+  
   
   export const getImagesFromDB = () => {
     return new Promise((resolve, reject) => {
@@ -42,10 +50,10 @@ export const initializeDB = () => {
         allRecords.onerror = (err) => reject(err);
       };
   
-      request.onerror = (err) => reject(err);
+      request.onerror = (err) => reject("Error al abrir la base de datos: " + err);
     });
   };
-
+  
   export const deleteImageFromDB = (id) => {
     return new Promise((resolve, reject) => {
       const request = indexedDB.open("ImageDatabase", 1);
