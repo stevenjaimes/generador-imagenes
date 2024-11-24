@@ -42,6 +42,11 @@ export const initializeDB = () => {
   
       request.onsuccess = (event) => {
         const db = event.target.result;
+        if (!db.objectStoreNames.contains("images")) {
+          // Si no existe la tienda "images", resuelve con un array vacío
+          return resolve([]);
+        }
+  
         const transaction = db.transaction("images", "readonly");
         const store = transaction.objectStore("images");
   
@@ -53,6 +58,7 @@ export const initializeDB = () => {
       request.onerror = (err) => reject("Error al abrir la base de datos: " + err);
     });
   };
+  
   
   export const deleteImageFromDB = (id) => {
     return new Promise((resolve, reject) => {
