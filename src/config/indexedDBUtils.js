@@ -34,16 +34,23 @@ export const initializeDB = () => {
       request.onerror = (err) => reject("Error al abrir la base de datos: " + err);
     });
   };
-  
-  
   export const getImagesFromDB = () => {
     return new Promise((resolve, reject) => {
       const request = indexedDB.open("ImageDatabase", 1);
   
-      request.onsuccess = (event) => {
+      request.onupgradeneeded = (event) => {
+        // Crear la tienda "images" si no existe durante la actualización/inicialización
         const db = event.target.result;
         if (!db.objectStoreNames.contains("images")) {
-          // Si no existe la tienda "images", resuelve con un array vacío
+          db.createObjectStore("images", { keyPath: "id", autoIncrement: true });
+        }
+      };
+  
+      request.onsuccess = (event) => {
+        const db = event.target.result;
+  
+        if (!db.objectStoreNames.contains("images")) {
+          // Si, por alguna razón, no existe la tienda después de abrir (aunque se maneja en `onupgradeneeded`)
           return resolve([]);
         }
   
@@ -58,6 +65,7 @@ export const initializeDB = () => {
       request.onerror = (err) => reject("Error al abrir la base de datos: " + err);
     });
   };
+  
   
   
   export const deleteImageFromDB = (id) => {
