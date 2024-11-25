@@ -34,6 +34,7 @@ export const initializeDB = () => {
       request.onerror = (err) => reject("Error al abrir la base de datos: " + err);
     });
   };
+  
   export const getImagesFromDB = () => {
     return new Promise((resolve, reject) => {
       const request = indexedDB.open("ImageDatabase", 1);

@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect, useCallback } from 'react';
 import { Link } from 'react-router-dom';
-import logo from '../assets/apolonampa.png';
+import logo from '../assets/logo.svg';
 import modelConfigs from '../config/models.json'; // Importamos el JSON
 
 const Header = () => {

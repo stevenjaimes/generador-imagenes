@@ -12,6 +12,7 @@ const MainPage = () => {
           </p>
           <div className="flex flex-wrap justify-center gap-4 mb-6">
             {modelConfigs
+              .slice(1)
               .filter((model) => model.showInMenu) // Solo los modelos con showInMenu como true
               .map((model, index) => (
                 <span key={index} className="text-center">
@@ -21,7 +22,7 @@ const MainPage = () => {
                   >
                     {model.name}
                   </Link>
-                  {index < modelConfigs.filter((model) => model.showInMenu).length - 1 && (
+                  {index < modelConfigs.filter((model) => model.showInMenu).length - 2 && (
                     <span className="mx-2 text-gray-500">|</span>
                   )}
                 </span>
